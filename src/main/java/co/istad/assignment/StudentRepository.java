@@ -1,23 +1,27 @@
 package co.istad.assignment;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
-@RequiredArgsConstructor
-public class StudentRepository {
-    private final StudentData studentData;
 
+public class StudentRepository {
+    private final List<Student> studentList;
+
+    StudentRepository(@Qualifier("s2") List<Student> studentList) {
+        this.studentList = studentList;
+    }
 
     public Student add(Student student) {
-        studentData.studentList().add(student);
+        studentList.add(student);
         return student;
     }
 
      public List <Student> getStudentList() {
-        return studentData.studentList().stream().map(student -> student).collect(Collectors.toList());
+        return new ArrayList<>(studentList);
     }
 }
