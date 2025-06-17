@@ -20,7 +20,6 @@ public class StudentService {
                 "kaka",
                 60 + (Math.random() * 41)
         );
-        studentRepository.add(student);
-        return student;
+        return studentRepository.add(student);
     }
 }
